@@ -1,0 +1,28 @@
+{
+    "exam": [
+        {
+            "question": "Jack and Jill went up the hill to fetch?",
+            "answers": {
+                "a": "A pail of water",
+                "b": "Porridge",
+                "c": "Vinegar"
+            },
+            "solution": [
+                "a"
+            ]
+        },
+        {
+            "question": "What did the old woman who lived in a shoe do to her children?",
+            "answers": {
+                "a": "She gave them some broth without any bread.",
+                "b": "She starved them.",
+                "c": "She sent them to sweep chimneys.",
+                "d": "She whipped them all soundly and put them to bed."
+            },
+            "solution": [
+                "a",
+                "d"
+            ]
+        }
+    ]
+}
