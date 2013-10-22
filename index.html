@@ -39,8 +39,8 @@
    <div align="right">
    <select id="paper">
        <option value="test1.json">Test Chapter</option>
-
    </select>
+   <button onclick="getCustomQuestionSet();">Get Custom</button>
    </div>
    <script>
        $(function () {
@@ -146,6 +146,23 @@
                console.log("status code: " + jqxhr.status + ", Request Failed: " + err);
            });
        };
+
+       function getCustomQuestionSet() {
+           $.getJSON("custom.json", function (data) {
+               
+               //Blank and reset the drop down.
+               $("select#paper").empty();
+               $("select#paper").append('<option value="test1.json">Test</option>');
+
+               $.each(data.chapters, function (k, v) {
+                   $("select#paper").append('<option value="'+v.file+'">'+v.name+'</option>');
+               });
+               
+           }).fail(function (jqxhr, textStatus, error) {
+               var err = textStatus + " - " + error;
+               console.log("status code: " + jqxhr.status + ", Request Failed: " + err);
+           });
+       }
    </script>
 </body>
 </html>
