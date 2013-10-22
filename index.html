@@ -1,118 +1,151 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Exam Preparation jQuery Tool</title>
-        <style>
-            div.question, div.score{
-                width: 800px;
-                margin: 10px auto;
-                padding:10px;
-                background-color:#eeeeee;
-                -webkit-border-radius: 10px; /* Safari, Chrome */
-                   -moz-border-radius: 10px; /* Firefox */
-                        border-radius: 10px; /* CSS3 */
-            }
-            div.score{
-                margin-bottom:10px;
-            }
-            span.check{
-                padding:5px;
-                float:right;
-                cursor:pointer;
-            }
-            span.final{
-                padding:5px;
-            }
-            select#paper{
-                position:absolute;
-                left:20px;
-                top:20px;
-            }
-        </style>
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
-    </head>
-    <body>
-    <select id="paper">
-        <option value="test1.json" selected="selected">Test 1</option>
-    </select>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-    <script>
-        (function(){
-            prepareExam("test1.json", "body");
-            $("select#paper").on("change", function(){
-                $val = $(this).val();
-                $("div.question").empty().remove();
-                $("div.score").empty().remove();
-                prepareExam($val, "body");
-            });
-        })();
-        jQuery.fn.compare = function(t) {
-            if (this.length != t.length) {
-                return false;
-            }
-            var a = this.sort(),
-                    b = t.sort();
-            for (var i = 0; t[i]; i++) {
-                if (a[i] !== b[i]) {
-                    return false;
-                }
-            }
-            return true;
-        };
-        function prepareExam(paper, target) {
-            $.getJSON(paper, function(exam) {
-                $.each(exam.exam, function(i, question){
-                    var d = $("<div></div>").addClass("question").appendTo(target);
-                    var q = $("<p></p>").html(i+1+". "+question.question).appendTo(d);
-                    var f = $("<fieldset></fieldset>").appendTo(d);
-                    $.each(question.answers, function(letter, possible){
-                        var labelID = letter+(i+1);
-                        $("<input></input>", {"type":"checkbox", "name":i+1,"value":letter, "id":labelID}).appendTo(f);
-                        $("<label></label>", {"for":labelID}).text(letter+". "+possible).appendTo(f);
-                        f.append('<br />');
-                    });
-                    d.data({"answer":question.solution});
-                    var c = $("<span></span>").addClass("check").text("Submit").button().appendTo(f).on("click", function(){
-                        var $parent = $(this).parent().parent();
-                        var allVals = [];
-                        $.each($parent.find("input:checked"), function(x, y){
-                            allVals.push($(y).attr("value"));
-                        })
-                        if($(allVals).compare($parent.data("answer"))){
-                            $parent.css("background-color","#ccffcc");
-                            $parent.find("span.check").remove();
-                            $parent.data({"success":true});
-                        }else{
-                            $parent.css("background-color","#ffcccc");
-                            $parent.find("span.check").remove();
-                            $parent.data({"success":false});
-                        }
-                    });
-                    var leg = (question.solution.length !== 1) ? "answers" : "answer";
-                    $("<legend></legend>").text("Please choose "+question.solution.length+" "+leg+":").prependTo(f);
-                });
-                var s = $("<div></div>").addClass("score").appendTo(target);
-                $("<p></p>").text("Ready to calculate your final score?").appendTo(s);
-                $("<span></span>").addClass("final").text("Check").button().appendTo(s).on("click", function(){
-                    var total = 0, correct = 0;
-                    $.each($("div.question"), function(i, div){
-                        total++;
-                        if($(div).data("success")){
-                            correct++;
-                        }
-                    });
-                    var l = $("<p></p>").text("Total Score = "+(((correct/total)*100).toFixed(2))+"%").appendTo($("div.score"));
-                    if(((correct/total)*100).toFixed(2) >= 68){
-                        l.css("color","green")
-                    }else{
-                        l.css("color","red")
-                    }
-                    $("span.final").remove();
-                });
-            });
-        };
-    </script>
-    </body>
+<head>
+   <title>Salesforce Test - DOM </title>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>    
+   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.css" type="text/css" media="all" />
+   <style>
+       div.question, div.score{
+           max-width: 850px;
+           margin: 10px auto;
+           padding:10px;
+           background-color:#eeeeee;
+           -moz-border-radius: 10px; /* Firefox */
+           -webkit-border-radius: 10px; /* Safari, Chrome */
+           border-radius: 10px; /* CSS3 */
+           text-align: justify;
+       }
+       div.score{
+           margin-bottom:10px;
+       }
+       span.check{
+           padding:3px 10px;
+           float:right;
+           cursor:pointer;
+       }
+       span.final, span.reset, span.show{
+           padding:3px 10px;
+       }
+       select#paper{
+           /*position:absolute;
+           left:20px;
+           top:20px;*/
+           margin: 5px 20px;
+       }
+   </style>
+</head>
+<body>
+   <div align="right">
+   <select id="paper">
+       <option value="test1.json">Test Chapter</option>
 
+   </select>
+   </div>
+   <script>
+       $(function () {
+           var defVal = $("select#paper").val();
+           if (defVal != "")
+               prepareExam(defVal, "body");
+           else
+               prepareExam("test1.json", "body");
+           $("select#paper").on("change", function () {
+               $val = $(this).val();
+               $("div.question").empty().remove();
+               $("div.score").empty().remove();
+               prepareExam($val, "body");
+           });
+       });
+
+       jQuery.fn.compare = function (t) {
+           if (this.length != t.length) {
+               return false;
+           }
+           var a = this.sort(),
+               b = t.sort();
+           for (var i = 0; t[i]; i++) {
+               if (a[i] !== b[i]) {
+                   return false;
+               }
+           }
+           return true;
+       };
+       function prepareExam(paper, target) {
+           $.ajaxSetup({ cache: false });
+           $.getJSON(paper, function (exam) {
+               $.each(exam.exam, function (i, question) {
+                   var d = $("<div></div>").addClass("question").appendTo(target);
+                   var q = $("<p></p>").html(i + 1 + ". " + question.question).appendTo(d);
+                   var f = $("<fieldset></fieldset>").appendTo(d);
+                   $.each(question.answers, function (letter, possible) {
+                       var labelID = letter + (i + 1);
+                       $("<input></input>", { "type": "checkbox", "name": i + 1, "value": letter, "id": labelID }).appendTo(f);
+                       $("<label></label>", { "for": labelID }).text(letter + ". " + possible).appendTo(f);
+                       f.append('<br />');
+                   });
+                   d.data({ "answer": question.solution });
+                   var c = $("<span></span>").addClass("check").text("Submit").button().appendTo(f).on("click", function () {
+                       var $parent = $(this).parent().parent();
+                       var allVals = [];
+                       $.each($parent.find("input:checked"), function (x, y) {
+                           allVals.push($(y).attr("value"));
+                       });
+                       if ($(allVals).compare($parent.data("answer"))) {
+                           $parent.css("background-color", "#ccffcc");
+                           //$parent.find("span.check").remove();
+                           $parent.data({ "success": true });
+                       }
+                       else {
+                           $parent.css("background-color", "#ffcccc");
+                           //$parent.find("span.check").remove();
+                           $parent.data({ "success": false });
+                       }
+                   });
+                   var leg = (question.solution.length !== 1) ? "answers" : "answer";
+                   $("<legend></legend>").text("Please choose " + question.solution.length + " " + leg + ":").prependTo(f);
+               });
+               var s = $("<div></div>").addClass("score").appendTo(target);
+               $("<p></p>").text("Ready to calculate your final score?").appendTo(s);
+               $("<span></span>").addClass("final").text("Check").button().appendTo(s).on("click", function () {
+                   var total = 0, correct = 0;
+                   // trigger an artificial click event
+                   jQuery("span.check").trigger(jQuery.Event("click"));
+                   $.each($("div.question"), function (i, div) {
+                       total++;
+                       if ($(div).data("success")) {
+                           correct++;
+                       }
+                   });
+                   var l = $("<p></p>").text("Total Score = " + (((correct / total) * 100).toFixed(2)) + "%").appendTo($("div.score"));
+                   if (((correct / total) * 100).toFixed(2) >= 68) {
+                       l.css("color", "green")
+                   } else {
+                       l.css("color", "red")
+                   }
+                   //$("span.final").remove();
+               });
+               s.append('&nbsp;');
+               $("<span></span>").addClass("reset").text("Reset").button().appendTo(s).on("click", function () {
+                   location.reload();
+               });
+               s.append('&nbsp;');
+               $("<span></span>").addClass("show").text("Show correct answers").button().appendTo(s).on("click", function () {
+                   $('input:checkbox').removeAttr('checked');
+                   $.each(exam.exam, function (i, question) {
+                       $.each(question.solution, function (j, ans) {
+                           var chkID = ans + (i + 1);
+                           $("#" + chkID).attr('checked', 'checked');
+                       });
+                   });
+                   $("div.question").css("background-color", "#ccffcc");
+                   $("div.question").find("span.check").remove();
+                   $("div.question").data({ "success": true });
+               });
+           }).fail(function (jqxhr, textStatus, error) {
+               var err = textStatus + " - " + error;
+               console.log("status code: " + jqxhr.status + ", Request Failed: " + err);
+           });
+       };
+   </script>
+</body>
 </html>
