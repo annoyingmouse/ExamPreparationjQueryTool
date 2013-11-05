@@ -172,7 +172,7 @@
                         $.each(exam.exam, function (i, question) {
                             $.each(question.solution, function (j, ans) {
                                 var chkID = ans + (i + 1);
-                                $("#" + chkID).attr('checked', 'checked');
+                                $("#" + chkID).prop('checked',true);
                             });
                         });
                         $("div.question").css({
