@@ -1,0 +1,39 @@
+div.question, 
+div.score{
+    max-width:             850px;
+    margin:                10px auto;
+    padding:               10px;
+    background-color:      #eee;
+            border-radius: 10px; /* CSS3 */
+       -moz-border-radius: 10px; /* Firefox */
+    -webkit-border-radius: 10px; /* Safari, Chrome */
+    text-align:            justify;
+}
+div.score{
+    margin-bottom:         10px;
+}
+div.pass{
+    background-color:      #0f0;
+}
+div.fail{
+    background-color:      #f00;
+}
+p.pass{
+    color:                 #0f0;
+}
+p.fail{
+    color:                 #f00;
+}
+span.check{
+    padding:               3px 10px;
+    float:                 right;
+    cursor:                pointer;
+}
+span.final, 
+span.reset, 
+span.show{
+    padding:               3px 10px;
+}
+select#paper{
+    margin:                5px 20px;
+}
