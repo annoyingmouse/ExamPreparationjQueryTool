@@ -1,11 +1,12 @@
 $(function () {
-    var defVal = $("select#paper").val();
+    var $paper = $("select#paper");
+    var defVal = $paper.val();
     if (defVal != ""){
         prepareExam(defVal, "#examHolder");
     } else {
         prepareExam("test1.json", "#examHolder");
     }
-    $("select#paper").on("change", function () {
+    $paper.on("change", function () {
         var $val = $(this).val();
         $("#examHolder").empty();
         prepareExam($val, "#examHolder");
@@ -22,13 +23,16 @@ $(function () {
         } else {
             $question.addClass("fail").data("success", false);
         }
-    });
-    $("#examHolder").on("click", ".reset", function(){
+    }).on("click", ".hint", function(){
+        var $question = $(this).closest(".question");
+        $.each($question.data("answer").split(","), function(k, v){
+            $question.find("label[for$='" + v + "']").css("font-weight", "bold");
+        });
+    }).on("click", ".reset", function(){
         $(".question").removeData("success").attr("class", "question");
         $("input:checkbox").prop("checked", false);
         $(".pass, .fail").remove();
-    });
-    $("#examHolder").on("click", ".show", function(){
+    }).on("click", ".show", function(){
         $(".question").each(function(){
             var correctAnswers = $(this).data("answer").split(",");
             $(this).find("input").each(function(){
@@ -41,8 +45,7 @@ $(function () {
             });
         });
         $(".check").trigger("click");
-    });
-    $("#examHolder").on("click", ".final", function(){
+    }).on("click", ".final", function(){
         $(".check").trigger("click");
         var total = 0, correct = 0;
         $(".question").each(function(){
@@ -60,9 +63,9 @@ $(function () {
 function prepareExam(paper, target) {
     $.getJSON(paper, function (exam) {
         $(target).append($("#exam").render(exam));
-        $(".check, .final, .reset, .show").button();
+        $(".check, .final, .reset, .show, .hint").button();
     });
-};
+}
 function getCustomQuestionSet() {
     $.getJSON("custom.json", function (data) {
         $("select#paper").empty();
