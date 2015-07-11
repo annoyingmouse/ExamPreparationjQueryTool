@@ -31,7 +31,8 @@ span.check{
 }
 span.final, 
 span.reset, 
-span.show{
+span.show,
+span.hint{
     padding:               3px 10px;
 }
 select#paper{

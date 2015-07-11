@@ -41,7 +41,6 @@ $(function () {
                 }else{
                      $(this).prop("checked",false);
                 }
-                
             });
         });
         $(".check").trigger("click");
