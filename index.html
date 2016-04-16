@@ -1,44 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Exam Preparation jQuery Tool</title>
-        <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="css/main.css" type="text/css" media="all" />
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Exam Preparation Tool</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+        <style>
+            .alert-holder{
+                margin-top: 15px;
+            }
+        </style>
     </head>
     <body>
-        <div align="right">
-            <select id="paper">
-                <option value="test1.json">Test</option>
-            </select>
-            <button onclick="getCustomQuestionSet();">Get Custom</button>
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="javascript:void(0)">
+                        Exam Preparation Tool: <small>Default</small>
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav navbar-right" id="default">
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Tests
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" id="tests"></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div id="examHolder"></div>
-        <script src="js/jquery.js"></script>    
-        <script src="js/jquery-ui.js"></script>
-        <script src="js/jsrender.js"></script>
-        <script src="js/main.js"></script>
-        <script type="text/jsrender" id="exam">
-            {{for exam}}
-            <div class="question" data-answer="{{:solution}}">
-                <p>{{:#index+1}}. {{:question}}</p>
-                <fieldset>
-                    <legend>Please choose {{:solution.length}}</legend>
-                    {{for ~getFields(answers)}}
-                    <input type="checkbox" name="{{:#index+1}}" value="{{:key}}" id="{{:#parent.parent.index+1}}_{{:#index+1}}_{{:key}}">
-                    <label for="{{:#parent.parent.index+1}}_{{:#index+1}}_{{:key}}">{{:key}}. {{:value}}</label>
-                    <br>
-                    {{/for}}
-                    <span class="hint">Hint</span>
-                    <span class="check">Submit</span>
-                </fieldset>
-            </div>
-            {{/for}}
-            <div class="score">
-                <p>Ready to calculate your final score?</p>
-                <span class="final">Check</span>
-                <span class="reset">Reset</span>
-                <span class="show">Show correct answers</span>
-            </div>
-        </script>
+        <div class="container" id="body">
+        </div>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="bower_components/jsrender/jsrender.js"></script>
+        <script type="text/javascript" src="js/site.js"></script>
     </body>
 </html>

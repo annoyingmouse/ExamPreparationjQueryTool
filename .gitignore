@@ -1,4 +1,9 @@
 ######################################
 # avoid custom json being commited #
 ######################################
-*.json
+custom.json
+chap*.json
+spring*.json
+summer*.json
+winter*.json
+exam.json

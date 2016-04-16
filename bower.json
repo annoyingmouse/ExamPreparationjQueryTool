@@ -1,0 +1,27 @@
+{
+  "name": "ExamPreparationjQueryTool",
+  "homepage": "https://github.com/annoyingmouse/ExamPreparationjQueryTool",
+  "authors": [
+    "Dominic Myers <annoyingmouse@gmail.com>"
+  ],
+  "description": "A tool to aid people taking exams",
+  "main": "index.html",
+  "keywords": [
+    "JSON",
+    "jQuery",
+    "JSRender",
+    "Bootstrap"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jsrender": "^0.9.75"
+  }
+}
