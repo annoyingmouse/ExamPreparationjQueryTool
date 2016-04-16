@@ -1,0 +1,7 @@
+.alert-holder{
+    margin-top: 15px;
+}
+.radio, .checkbox {
+    margin-top: initial;
+    margin-bottom: initial;
+}
