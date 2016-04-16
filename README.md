@@ -1,12 +1,12 @@
 #Exam Preparation jQuery Tool#
 
-Takes a json formatted file and prepares an exam based on that json file. All external resources (js and css) are served via Google CDN but can be local if you change the index.hmtl file.
+Takes a json formatted file and prepares an exam based on that json file. All other resources ~(js and css) are served via Google CDN but can be local if you change the index.html file~ are served via bower so it is now self contained.
 
 To add new json exams copy the existing one and add a reference to the dropdown on the top-left of the page.
 
 I made this so as my wife would not roll her eyes when I asked for help with revision... hopefully it'll help you too.
 
-I'm using [JsRender](https://github.com/borismoore/jsrender) though this might change soon...
+I'm using [JsRender](https://github.com/borismoore/jsrender) ~though this might change soon...~ as it rocks!
 
 ##Edit##
 
@@ -22,13 +22,15 @@ Can now have multiple json files within the main directory to ease the changing 
 }
 ```
 
-Then you can click the "Get Custom" button on the top right to access the new files.
+~Then you can click the "Get Custom" button on the top right to access the new files.~ If you've downloaded this and then added the custom.json file you'll need to refresh the page, the new exams should be available in the top right via a dropdown.
 
-Also added a hint button for those who might need a little help. The hint emboldens the label for the correct answer, it won't remove the hint unless the page is reloaded... just so you'll know what you needed help with ;-)
+Also added a hint button for those who might need a little help. The hint ~emboldens~ Italicises the label of the correct answer, it won't remove the hint unless the ~page is reloaded~ the reset button at the bottom of the page is clicked. ~just so you'll know what you needed help with ;-)~
 
 ##Usage##
 
-You can run this after downloading but at present it will only work on [FireFox](https://www.mozilla.org/en-GB/firefox/new/) as it's pulling files from a CDN and Chrome _et al_ aren't all that keen on you loading external resources for a local file unless you're running it from a local server such as [XAMPP](https://www.apachefriends.org/index.html). As such it might be easier just to install FireFox.
+~You can run this after downloading but at present it will only work on [FireFox](https://www.mozilla.org/en-GB/firefox/new/) as it's pulling files from a CDN and Chrome _et al_ aren't all that keen on you loading external resources for a local file unless you're running it from a local server such as [XAMPP](https://www.apachefriends.org/index.html). As such it might be easier just to install FireFox.~
+
+The best way to run this if you don't have access to a server is to open the directory in [Brackets](http://brackets.io/) and use Live preview.
 
 Should you have you own set of json files then please just add them to the root directory (i.e. the directory where index.html is) and click the "Get Custom" button.
 
