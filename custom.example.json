@@ -1,0 +1,14 @@
+/*
+ * Either rename to custom.json or change site.js to point to custom.example.json
+ */
+
+{   "root": "customfolder",             // Folder where your custom exams reside
+    "chapters": [                       // Array of custom exam objects
+        {
+            "name": "Default",          // Always good to be able to get back to the original!
+            "file": "../example.json"   // Location of the original in relation to customfolder
+        },{
+            "name": "test",             // Title for the exam
+            "file": "test.json"         // Filename of the exam
+        }    ]
+}
