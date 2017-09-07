@@ -1,47 +1,46 @@
 {{for exam}}
-    <div 
-        class="question panel panel-default" 
+    <div
+        class="question panel panel-default"
         data-answer="{{:solution}}">
-        <div 
+        <div
             class="panel-heading">
-            <h3 
+            <h3
                 class="panel-title">
                 {{:#index+1}}. {{:question}}
             </h3>
         </div>
-        <div 
+        <div
             class="panel-body">
             <p>
                 Please choose {{:solution.length}}
             </p>
         </div>
-        <ul 
+        <ul
             class="list-group">
             {{for ~getFields(answers) ~index=#index+1 ~len=solution.length}}
                 {{if ~len === 1}}
-                    <li 
+                    <li
                         class="list-group-item">
                         <div class="radio">
                             <label>
-                                <input 
-                                    type="radio" 
-                                    name="{{:~index}}" 
-                                    value="{{:key}}" 
+                                <input
+                                    type="radio"
+                                    name="{{:~index}}"
+                                    value="{{:key}}"
                                     id="{{:~index}}_{{:#parent.index+1}}_{{:key}}"/>
                                 {{:value}}
                             </label>
-
                         </div>
                     </li>
                 {{else}}
-                    <li 
+                    <li
                         class="list-group-item">
                         <div class="checkbox">
                             <label for="{{:~index}}_{{:#parent.index+1}}_{{:key}}">
-                                <input 
-                                    type="checkbox" 
-                                    name="{{:~index}}_{{:#parent.index+1}}_{{:key}}" 
-                                    value="{{:key}}" 
+                                <input
+                                    type="checkbox"
+                                    name="{{:~index}}_{{:#parent.index+1}}_{{:key}}"
+                                    value="{{:key}}"
                                     id="{{:~index}}_{{:#parent.index+1}}_{{:key}}"/>
                                 {{:value}}
                             </label>
@@ -51,47 +50,46 @@
                 {{/if}}
             {{/for}}
         </ul>
-        <div 
+        <div
             class="panel-footer clearfix">
-            <span 
+            <span
                 class="btn btn-default hint">
                 Hint
             </span>
-            <span 
+            <span
                 class="btn btn-primary pull-right check">
                 Submit
             </span>
         </div>
     </div>
 {{/for}}
-<div 
+<div
     class="well score clearfix">
     <p>
         Ready to calculate your final score?
     </p>
-    <div 
+    <div
         class="row">
-        <div 
+        <div
             class="col-md-6">
-            <div 
+            <div
                 class="btn-group" role="group" aria-label="Actions">
-                <div 
+                <div
                     class="btn btn-warning reset">
                     Reset
                 </div>
-                <div 
+                <div
                     class="btn btn-info show">
                     Show correct answers
                 </div>
             </div>
         </div>
-        <div 
+        <div
             class="col-md-6">
-            <div 
+            <div
                 class="btn btn-primary pull-right final">
                 Check
             </div>
         </div>
-
     </div>
 </div>

@@ -17,10 +17,10 @@ $(function(){
     });
     $.getJSON("example.json", function(exam){
         renderExternalTmpl({
-            name: "exam", 
-            selector: "#body", 
-            data: exam
-        });                        
+            "name": "exam",
+            "selector": "#body",
+            "data": exam
+        });
     });
     $("#body").on("click", ".check", function(){
         var $question = $(this).closest(".question");
@@ -29,7 +29,7 @@ $(function(){
             return $(o).val();
         }).sort();
         var a2 = $question.data("answer").split(",").sort();
-        if(a1.length === a2.length && a1.every(function(v,i) { 
+        if(a1.length === a2.length && a1.every(function(v,i) {
             return v === a2[i]
         })){
             $question.addClass("panel-success").data("success", true);
@@ -72,9 +72,9 @@ $(function(){
     }).on("click", ".final", function(){
         $(".alert-holder").empty().remove();
         $(".check").trigger("click");
-        var total = 0, 
-            correct = 0, 
-            percentage = 0.00, 
+        var total = 0,
+            correct = 0,
+            percentage = 0.00,
             message = {};
         $(".question").each(function(){
             total++;
@@ -92,11 +92,11 @@ $(function(){
             message.header = "Oh snap!";
         }
         renderExternalTmpl({
-            name: "outcome", 
-            selector: "div.score", 
-            data: message
+            "name": "outcome",
+            "selector": "div.score",
+            "data": message
         });
-    });                
+    });
 });
 $(".navbar").on("click", ".test", function(e){
     e.preventDefault();
@@ -107,10 +107,10 @@ $(".navbar").on("click", ".test", function(e){
     $("#body").empty();
     $.getJSON($(this).data("value"), function(exam){
         renderExternalTmpl({
-            name: "exam", 
-            selector: "#body", 
-            data: exam
-        });                        
+            "name": "exam",
+            "selector": "#body",
+            "data": exam
+        });
     });
 });
 $.views.helpers({
@@ -120,8 +120,8 @@ $.views.helpers({
             if (object.hasOwnProperty(key)){
                 value = object[key];
                 fieldsArray.push({
-                    key: key,
-                    value: value
+                    "key": key,
+                    "value": value
                 });
             }
         }
@@ -131,8 +131,10 @@ $.views.helpers({
 var renderExternalTmpl = function(item) {
     var file = './templates/_' + item.name + '.tmpl.html';
     $.when($.get(file))
-     .done(function(tmplData) {
-         $.templates({ tmpl: tmplData });
-         $(item.selector).append($.render.tmpl(item.data));
-     });    
-}
+        .done(function(tmplData) {
+            $.templates({
+                "tmpl": tmplData
+            });
+            $(item.selector).append($.render.tmpl(item.data));
+        });
+};
