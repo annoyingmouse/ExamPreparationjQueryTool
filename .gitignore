@@ -1,9 +1,7 @@
-######################################
-# avoid custom json being commited #
-######################################
+.idea/
+AmazonDynamoDB_FromBeginnerToPro01.json
+AmazonDynamoDB_FromBeginnerToPro02.json
+AmazonDynamoDB_FromBeginnerToPro03.json
+customitems/
+bower_components/
 custom.json
-chap*.json
-spring*.json
-summer*.json
-winter*.json
-exam.json

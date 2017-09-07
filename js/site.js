@@ -1,11 +1,13 @@
+var root = null;
 $(function(){
     $.getJSON("custom.json", function(data){
+        root = data.root;
         $.each(data.chapters, function(k, v){
             $("#tests").append($("<li></li>", {
                 "class": (v.name === "Default") ? " active" : null
             }).append($("<a></a>", {
                 "text": v.name,
-                "data-value": v.file,
+                "data-value": root + "/" + v.file,
                 "href": "#",
                 "class": "test"
             })));
@@ -13,7 +15,7 @@ $(function(){
     }).fail(function() {
         $("#default").empty().remove();
     });
-    $.getJSON("test1.json", function(exam){
+    $.getJSON("example.json", function(exam){
         renderExternalTmpl({
             name: "exam", 
             selector: "#body", 
@@ -101,8 +103,6 @@ $(".navbar").on("click", ".test", function(e){
     var $this = $(this);
     $(".test").parent("li").removeClass("active");
     $this.parent("li").addClass("active");
-
-
     $(".navbar-brand").find("small").text($this.text());
     $("#body").empty();
     $.getJSON($(this).data("value"), function(exam){
